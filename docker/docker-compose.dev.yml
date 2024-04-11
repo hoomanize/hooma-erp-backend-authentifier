@@ -1,0 +1,37 @@
+version: '3.8'
+
+name: "authentifier-service"
+
+services:
+  authentifier_apache:
+    container_name: "authentifier_apache"
+    build:
+      context: ../
+      dockerfile: docker/apache/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - ../../../common/environment-variables/development/.env
+    networks:
+      authentifier_net:
+        aliases:
+          - authentifier_apache
+  authentifier_application:
+    container_name: "authentifier_application"
+    depends_on:
+      - authentifier_apache
+    build:
+      context: ../
+      dockerfile: docker/application/Dockerfile
+    volumes:
+      - ${PWD}/src:/srv/authentifier-service/src
+    env_file:
+      - ../../../common/environment-variables/development/.env
+    networks:
+      authentifier_net:
+        aliases:
+          - authentifier_application
+
+networks:
+  authentifier_net:

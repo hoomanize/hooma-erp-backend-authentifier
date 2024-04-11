@@ -1,0 +1,32 @@
+name: check_commits
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+jobs:
+  count-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Checkout code
+        id: checkout_code
+        uses: actions/checkout@v2
+
+      - name: Count commits
+        id: count_commits
+        run: echo "::set-output name=commits::$(git rev-list --count HEAD)"
+
+      - name: Check commit count
+        id: check_count
+        run: |
+          if [ "${{ steps.count_commits.outputs.commits }}" -gt "1" ]; then
+            echo "More than 1 commit found in the PR."
+            exit 1
+          else
+            echo "PR has 1 or fewer commits."
+          fi

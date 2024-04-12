@@ -1,4 +1,4 @@
-FROM node:20.9.0
+FROM node:20.11.0
 LABEL authors="@hooma"
 
 WORKDIR /srv/authentifier-service

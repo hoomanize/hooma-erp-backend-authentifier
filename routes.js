@@ -22,9 +22,9 @@ const ROUTES = [
     proxy: {
       target: 'https://localhost',
       changeOrigin: true,
-      pathRewrite: {'^/': '/auth/'},
+      pathRewrite: { '^/': '/auth/' },
     },
   },
-]
+];
 
-module.exports = { ROUTES }
+module.exports = { ROUTES };

@@ -1,12 +1,13 @@
 # Hooma - Authentifier Service
-___
+
+---
 
 # Infra
 
 ```mermaid
     sequenceDiagram
         participant client
-    box Blue Docker 
+    box Blue Docker
         participant webserver (ngnix)
         participant authentifier service
         participant db (mongo)

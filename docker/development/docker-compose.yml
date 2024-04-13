@@ -6,13 +6,13 @@ services:
   authentifier_apache:
     container_name: 'authentifier_apache'
     build:
-      context: ../
-      dockerfile: docker/apache/Dockerfile
+      context: ../../.
+      dockerfile: docker/development/apache/Dockerfile
     ports:
       - '80:80'
       - '443:443'
     env_file:
-      - ../../../common/environment-variables/development/.env
+      - ../../common/environment-variables/development/.env
     networks:
       authentifier_net:
         aliases:
@@ -22,12 +22,12 @@ services:
     depends_on:
       - authentifier_apache
     build:
-      context: ../
-      dockerfile: docker/application/Dockerfile
+      context: ../../.
+      dockerfile: docker/development/application/Dockerfile
     volumes:
-      - ${PWD}/src:/srv/authentifier-service/src
+      - ../../src:/srv/authentifier-service/src
     env_file:
-      - ../../../common/environment-variables/development/.env
+      - ../../common/environment-variables/development/.env
     networks:
       authentifier_net:
         aliases:

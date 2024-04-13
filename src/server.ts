@@ -2,15 +2,15 @@ import Hapi, { Server } from '@hapi/hapi';
 import Http2 from 'http2';
 import fs from 'fs';
 
-import { addResponseLoggerMiddleware } from './middlewares/response-logging.middleware';
-import { addProxyMiddleware } from './middlewares/proxy.middleware';
+import { addResponseLoggerMiddleware } from './middlewares/response-logging.middleware.js';
+import { addProxyMiddleware } from './middlewares/proxy.middleware.js';
 
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+const PORT = process.env.NODE_PORT;
+const HOST = process.env.NODE_HOST;
 
 const serversOptions = {
-  key: fs.readFileSync('ssl-certificates/hoomalocal.key'),
-  cert: fs.readFileSync('ssl-certificates/hoomalocal.crt'),
+  key: fs.readFileSync('common/ssl-certificates/hoomalocal.key'),
+  cert: fs.readFileSync('common/ssl-certificates/hoomalocal.crt'),
 };
 
 const addMiddlewares = async (server: Server) => {

@@ -1,4 +1,4 @@
-import { initServer, startServer } from './src/server';
+import { initServer, startServer } from './server.js';
 
 const runService = async () => {
   const server = await initServer();
